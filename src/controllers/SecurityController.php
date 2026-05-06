@@ -8,6 +8,8 @@ class SecurityController extends AppController {
         if (!$this->isPost()) {
             return $this->render('login', ['title' => 'Login Page']);
         }
+        
+        die(var_dump($_POST));
 
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -21,6 +23,8 @@ class SecurityController extends AppController {
         if (!$this->isPost()) {
             return $this->render('register', ['title' => 'Register Account']);
         }
+
+        die(var_dump($_POST));
 
         $username = $_POST['username'];
         $email = $_POST['email'];
