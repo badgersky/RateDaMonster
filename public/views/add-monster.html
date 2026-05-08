@@ -1,0 +1,21 @@
+<?php include 'partials/head.html'; ?>
+<body>
+    <h1><?= isset($monster) ? 'Edytuj Monstera' : 'Dodaj nowego Monstera'; ?></h1>
+    
+    <form action="/admin/add-monster<?= isset($monster) ? '/'.$monster['id'] : ''; ?>" method="POST">
+        <label>Nazwa:</label>
+        <input name="name" type="text" value="<?= $monster['name'] ?? ''; ?>" required>
+        
+        <label>Opis:</label>
+        <textarea name="description" required><?= $monster['description'] ?? ''; ?></textarea>
+        
+        <label>URL zdjęcia:</label>
+        <input name="image_url" type="text" value="<?= $monster['image_url'] ?? ''; ?>" required>
+        
+        <label>ID typu:</label>
+        <input name="type_id" type="number" value="<?= $monster['monster_type_id'] ?? ''; ?>" required>
+        
+        <button type="submit"><?= isset($monster) ? 'Zapisz zmiany' : 'Dodaj Monsterka'; ?></button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?php include 'partials/head.html'; ?>
+<body>
+    <h1>Zarządzanie Monsterami</h1>
+    <a href="/admin/add-monster"><button>Dodaj nowy</button></a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($monsters as $monster): ?>
+            <tr>
+                <td><?= $monster['name']; ?></td>
+                <td>
+                    <a href="/admin/add-monster/<?= $monster['id']; ?>"><button>Edytuj</button></a>
+                    <button>Usuń</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</body>
+</html>

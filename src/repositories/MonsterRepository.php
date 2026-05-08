@@ -41,6 +41,26 @@ class MonsterRepository extends Repository {
         ]);
     }
 
+    public function updateMonster(int $id, string $name, string $description, string $image_url, int $type_id): void 
+    {
+        $stmt = $this->database->connect()->prepare(
+            'UPDATE monsters 
+             SET name = :name, 
+                 description = :description, 
+                 image_url = :image_url, 
+                 monster_type_id = :type_id 
+             WHERE id = :id'
+        );
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':image_url', $image_url, PDO::PARAM_STR);
+        $stmt->bindParam(':type_id', $type_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
     public function deleteMonster(int $id): bool 
     {
         $stmt = $this->database->connect()->prepare(

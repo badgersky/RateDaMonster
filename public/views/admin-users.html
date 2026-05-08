@@ -1,0 +1,26 @@
+<?php include 'partials/head.html'; ?>
+<body>
+    <h1>Zarządzanie użytkownikami</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?= $user['id']; ?></td>
+                <td><?= $user['username']; ?></td>
+                <td>
+                    <button>Blokuj</button>
+                    <button>Usuń</button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</body>
+</html>
