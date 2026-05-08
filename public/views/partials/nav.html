@@ -1,0 +1,21 @@
+<nav>
+    <div>
+        <a href="/monsters">Lista Monsterków</a>
+    </div>
+
+    <div>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <span>Witaj, <?= $_SESSION['username']; ?>!</span>
+            
+            <?php if ($_SESSION['username'] === 'admin'): ?>
+                <a href="/admin/users">Użytkownicy</a>
+                <a href="/admin/monsters">Zarządzaj Monsterami</a>
+            <?php endif; ?>
+
+            <a href="/logout">Wyloguj</a>
+        <?php else: ?>
+            <a href="/login">Zaloguj</a>
+            <a href="/register">Zarejestruj</a>
+        <?php endif; ?>
+    </div>
+</nav>

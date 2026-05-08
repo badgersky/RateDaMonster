@@ -1,5 +1,6 @@
 <?php include 'partials/head.html'; ?>
 <body>
+    <?php include 'partials/nav.html'; ?>
     <h1><?= isset($monster) ? 'Edytuj Monstera' : 'Dodaj nowego Monstera'; ?></h1>
     
     <form action="/admin/add-monster<?= isset($monster) ? '/'.$monster['id'] : ''; ?>" method="POST">
