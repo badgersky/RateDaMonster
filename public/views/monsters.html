@@ -1,13 +1,17 @@
-<?php include 'partials/head.html'; ?>
 <body>
     <h1>All Monster Energy Drinks</h1>
     <div class="monster-container">
         <?php foreach ($monsters as $monster): ?>
-            <div class="monster-item">
-                <a href="/monsters/<?= $monster['id']; ?>">
-                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" style="width: 150px; height: auto;">
-                    <h2><?= $monster['name']; ?></h2>
-                </a>
+            <div class="monster-item" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
+                <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" style="width: 100px;">
+                <h2><?= $monster['name']; ?></h2>
+                <p><?= $monster['description']; ?></p>
+                
+                <form action="/monsters/<?= $monster['id']; ?>" method="POST">
+                    <label>Ocena (1-10):</label>
+                    <input type="number" name="rating" min="1" max="10" required>
+                    <button type="submit">Oceń</button>
+                </form>
             </div>
         <?php endforeach; ?>
     </div>
