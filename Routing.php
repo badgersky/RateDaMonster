@@ -38,6 +38,14 @@ class Routing {
             'controller' => 'AdminController',
             'action' => 'addMonster'
         ],
+        'admin/add-monster/(\d+)' => [
+            'controller' => 'AdminController',
+            'action' => 'addMonster'
+        ],
+        'admin/delete-user/(\d+)' => [
+            'controller' => 'AdminController',
+            'action' => 'deleteUser'
+        ],
         '' => [
             'controller' => 'SecurityController',
             'action' => 'login'

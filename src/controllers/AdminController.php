@@ -17,13 +17,13 @@ class AdminController extends AppController {
     public function users() {
         $this->checkAdmin();
         $userRepository = new UserRepository();
-        $this->render('admin-users', ['users' => $userRepository->getUsers()]);
+        $this->render('admin-users', ['users' => $userRepository->getUsers(), 'title' => 'Users List']);
     }
 
     public function adminMonsters() {
         $this->checkAdmin();
         $monsterRepository = new MonsterRepository();
-        $this->render('admin-monsters', ['monsters' => $monsterRepository->getMonsters()]);
+        $this->render('admin-monsters', ['monsters' => $monsterRepository->getMonsters(), 'title' => 'Monster List']);
     }
 
     public function addMonster($id = null) {
@@ -47,6 +47,16 @@ class AdminController extends AppController {
         }
 
         $monster = $id ? $monsterRepository->getMonster((int)$id) : null;
-        $this->render('add-monster', ['monster' => $monster]);
+        $this->render('add-monster', ['monster' => $monster, 'title' => 'Add Monster']);
+    }
+
+    public function deleteUser(int $id) {
+    $this->checkAdmin();
+    
+    $userRepository = new UserRepository();
+    $userRepository->deleteUser($id);
+
+    header("Location: /admin/users");
+    exit();
     }
 }

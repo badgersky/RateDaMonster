@@ -15,8 +15,9 @@
                 <td><?= $user['id']; ?></td>
                 <td><?= $user['username']; ?></td>
                 <td>
-                    <button>Blokuj</button>
-                    <button>Usuń</button>
+                    <form action="/admin/delete-user/<?= $user['id']; ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">
+                        <button type="submit">Usuń</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>
