@@ -1,7 +1,7 @@
 <?php
 
 require_once 'src/controllers/SecurityController.php';
-// require_once 'src/controllers/MonsterController.php';
+require_once 'src/controllers/MonsterController.php';
 // require_once 'src/controllers/AdminController.php';
 
 class Routing {
