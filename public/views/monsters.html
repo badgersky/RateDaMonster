@@ -2,16 +2,27 @@
     <h1>All Monster Energy Drinks</h1>
     <div class="monster-container">
         <?php foreach ($monsters as $monster): ?>
-            <div class="monster-item" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
-                <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" style="width: 100px;">
+            <div class="monster-item">
+                <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
                 <h2><?= $monster['name']; ?></h2>
+                
+                <div>
+                    <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
+                </div>
+
                 <p><?= $monster['description']; ?></p>
                 
-                <form action="/monsters/<?= $monster['id']; ?>" method="POST">
-                    <label>Ocena (1-10):</label>
-                    <input type="number" name="rating" min="1" max="10" required>
-                    <button type="submit">Oceń</button>
-                </form>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form action="/monsters/<?= $monster['id']; ?>" method="POST">
+                        <label>Twoja ocena (1-10):</label>
+                        <input type="number" name="rating" min="1" max="10" required>
+                        <button type="submit">Oceń</button>
+                    </form>
+                <?php else: ?>
+                    <a href="/login">
+                        <button type="button">Zaloguj się, aby ocenić</button>
+                    </a>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
