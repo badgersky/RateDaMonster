@@ -76,4 +76,14 @@ class MonsterRepository extends Repository {
         
         return $stmt->execute();
     }
+
+    public function getMonsterTypes(): array
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM monster_types ORDER BY name ASC
+        ');
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

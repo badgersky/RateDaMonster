@@ -4,19 +4,34 @@
     <h1><?= isset($monster) ? 'Edytuj Monstera' : 'Dodaj nowego Monstera'; ?></h1>
     
     <form action="/admin/add-monster<?= isset($monster) ? '/'.$monster['id'] : ''; ?>" method="POST">
-        <label>Nazwa:</label>
-        <input name="name" type="text" value="<?= $monster['name'] ?? ''; ?>" required>
-        
-        <label>Opis:</label>
-        <textarea name="description" required><?= $monster['description'] ?? ''; ?></textarea>
-        
-        <label>URL zdjęcia:</label>
-        <input name="image_url" type="text" value="<?= $monster['image_url'] ?? ''; ?>" required>
-        
-        <label>ID typu:</label>
-        <input name="type_id" type="number" value="<?= $monster['monster_type_id'] ?? ''; ?>" required>
-        
-        <button type="submit"><?= isset($monster) ? 'Zapisz zmiany' : 'Dodaj Monsterka'; ?></button>
+        <div>
+            <label>Nazwa:</label>
+            <input name="name" type="text" value="<?= $monster['name'] ?? ''; ?>" required>
+        </div>
+        <div>
+            <label>Opis:</label>
+            <textarea name="description" required><?= $monster['description'] ?? ''; ?></textarea>
+        </div>
+        <div>
+            <label>URL zdjęcia:</label>
+            <input name="image_url" type="text" value="<?= $monster['image_url'] ?? ''; ?>" required>
+        </div>
+        <div>
+            <label>Typ Monstera:</label>
+            <select name="type_id" required>
+                <option value="" disabled <?= !isset($monster) ? 'selected' : ''; ?>>Wybierz typ</option>
+                <?php foreach ($types as $type): ?>
+                    <option value="<?= $type['id']; ?>" 
+                        <?= (isset($monster) && $monster['monster_type_id'] == $type['id']) ? 'selected' : ''; ?>>
+                        <?= $type['name']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div>
+            <button type="submit"><?= isset($monster) ? 'Zapisz zmiany' : 'Dodaj Monsterka'; ?></button>
+            <a href="/admin/monsters">Anuluj</a>
+        </div>
     </form>
 </body>
 </html>

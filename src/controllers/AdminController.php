@@ -47,7 +47,13 @@ class AdminController extends AppController {
         }
 
         $monster = $id ? $monsterRepository->getMonster((int)$id) : null;
-        $this->render('add-monster', ['monster' => $monster, 'title' => 'Add Monster']);
+        $types = $monsterRepository->getMonsterTypes();
+
+        $this->render('add-monster', [
+            'monster' => $monster, 
+            'types' => $types, 
+            'title' => 'Add Monster'
+        ]);
     }
 
     public function deleteUser(int $id) {
