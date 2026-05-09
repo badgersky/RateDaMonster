@@ -19,7 +19,11 @@ class MonsterRepository extends Repository {
     public function getMonsters(): array 
     {
         $stmt = $this->database->connect()->prepare(
-            'SELECT * FROM monsters ORDER BY name ASC'
+            'SELECT m.*, ROUND(AVG(r.rating), 1) as avg_rating 
+            FROM monsters m 
+            LEFT JOIN ratings r ON m.id = r.monster_id 
+            GROUP BY m.id 
+            ORDER BY avg_rating DESC'
         );
         $stmt->execute();
 

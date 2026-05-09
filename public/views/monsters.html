@@ -1,31 +1,37 @@
 <?php include 'partials/head.html'; ?>
 <body>
     <?php include 'partials/nav.html'; ?>
-    <h1>All Monster Energy Drinks</h1>
-    <div class="monster-container">
-        <?php foreach ($monsters as $monster): ?>
-            <div class="monster-item">
-                <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
-                <h2><?= $monster['name']; ?></h2>
-                
-                <div>
-                    <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
-                </div>
+    
+    <main>
+        <h1>All Monster Energy Drinks</h1>
+        
+        <section>
+            <?php foreach ($monsters as $monster): ?>
+                <article>
+                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
+                    
+                    <header>
+                        <h2><?= $monster['name']; ?></h2>
+                        <div>
+                            <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
+                        </div>
+                    </header>
 
-                <p><?= $monster['description']; ?></p>
-                
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <form action="/monsters/<?= $monster['id']; ?>" method="POST">
-                        <label>Twoja ocena (1-10):</label>
-                        <input type="number" name="rating" min="1" max="10" required>
-                        <button type="submit">Oceń</button>
-                    </form>
-                <?php else: ?>
-                    <a href="/login">
-                        <button type="button">Zaloguj się, aby ocenić</button>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+                    <p><?= $monster['description']; ?></p>
+                    
+                    <footer>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <form action="/monsters/<?= $monster['id']; ?>" method="POST">
+                                <label for="rating-<?= $monster['id']; ?>">Twoja ocena (1-10):</label>
+                                <input type="number" id="rating-<?= $monster['id']; ?>" name="rating" min="1" max="10" required>
+                                <button type="submit">Oceń</button>
+                            </form>
+                        <?php else: ?>
+                            <a href="/login">Zaloguj się, aby ocenić</a>
+                        <?php endif; ?>
+                    </footer>
+                </article>
+            <?php endforeach; ?>
+        </section>
+    </main>
 </body>

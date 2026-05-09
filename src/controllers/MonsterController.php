@@ -9,14 +9,8 @@ class MonsterController extends AppController {
     public function monsters() {
         session_start();
         $monsterRepository = new MonsterRepository();
-        $ratingRepository = new RatingRepository();
-        
-        $monsters = $monsterRepository->getMonsters();
 
-        foreach ($monsters as &$monster) {
-            $avg = $ratingRepository->getAverageRating($monster['id']);
-            $monster['avg_rating'] = $avg ? round($avg, 1) : 'No ratings';
-        }
+        $monsters = $monsterRepository->getMonsters();
 
         $this->render('monsters', [
             'monsters' => $monsters,
