@@ -8,7 +8,7 @@
         <section>
             <?php foreach ($monsters as $monster): ?>
                 <article>
-                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
+                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" loading="lazy">
                     
                     <header>
                         <h2><?= $monster['name']; ?></h2>
