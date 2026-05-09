@@ -23,7 +23,7 @@ class MonsterRepository extends Repository {
             FROM monsters m 
             LEFT JOIN ratings r ON m.id = r.monster_id 
             GROUP BY m.id 
-            ORDER BY avg_rating DESC'
+            ORDER BY RANDOM()'
         );
         $stmt->execute();
 

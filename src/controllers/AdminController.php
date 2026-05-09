@@ -51,12 +51,12 @@ class AdminController extends AppController {
     }
 
     public function deleteUser(int $id) {
-    $this->checkAdmin();
-    
-    $userRepository = new UserRepository();
-    $userRepository->deleteUser($id);
+        $this->checkAdmin();
+        
+        $userRepository = new UserRepository();
+        $userRepository->deleteUser($id);
 
-    header("Location: /admin/users");
-    exit();
+        header("Location: /admin/users");
+        exit();
     }
 }
