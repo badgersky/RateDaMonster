@@ -1,13 +1,17 @@
 <?php include 'partials/head.html'; ?>
 <body>
     <?php include 'partials/nav.html'; ?>
-    <form action="/register" method="POST">
-    <h2>Create Account</h2>
-    <?php include 'partials/messages.html'; ?>
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="password" name="confirmedPassword" placeholder="Confirm Password" required>
-    <button type="submit">Register</button>
-</form>
+    <main class="container centered">
+        <section class="auth-card">
+            <h2>Create Account</h2>
+            <?php include 'partials/messages.html'; ?>
+            <form action="/register" method="POST" class="auth-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirmedPassword" placeholder="Confirm Password" required>
+                <button type="submit" class="btn-auth">Register</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>

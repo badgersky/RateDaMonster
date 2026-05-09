@@ -1,28 +1,32 @@
 <?php include 'partials/head.html'; ?>
 <body>
     <?php include 'partials/nav.html'; ?>
-    <h1>Zarządzanie użytkownikami</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $user['id']; ?></td>
-                <td><?= $user['username']; ?></td>
-                <td>
-                    <form action="/admin/delete-user/<?= $user['id']; ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">
-                        <button type="submit">Usuń</button>
-                    </form>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <main class="container">
+        <h1>Zarządzanie użytkownikami</h1>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= $user['id']; ?></td>
+                        <td><?= $user['username']; ?></td>
+                        <td>
+                            <form action="/admin/delete-user/<?= $user['id']; ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">
+                                <button type="submit" class="btn-delete">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
 </html>

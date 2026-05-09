@@ -1,33 +1,30 @@
 <?php include 'partials/head.html'; ?>
 <body>
     <?php include 'partials/nav.html'; ?>
-    
-    <main>
+    <main class="container">
         <h1>All Monster Energy Drinks</h1>
-        
-        <section>
+        <section class="monster-grid">
             <?php foreach ($monsters as $monster): ?>
-                <article>
-                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" loading="lazy">
-                    
-                    <header>
+                <article class="monster-card">
+                    <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" loading="lazy" class="monster-img">
+                    <header class="card-header">
                         <h2><?= $monster['name']; ?></h2>
-                        <div>
+                        <div class="rating-badge">
                             <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
                         </div>
                     </header>
-
-                    <p><?= $monster['description']; ?></p>
-                    
-                    <footer>
+                    <p class="description"><?= $monster['description']; ?></p>
+                    <footer class="card-footer">
                         <?php if (isset($_SESSION['user_id'])): ?>
-                            <form action="/monsters/<?= $monster['id']; ?>" method="POST">
+                            <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="rating-form">
                                 <label for="rating-<?= $monster['id']; ?>">Twoja ocena (1-10):</label>
-                                <input type="number" id="rating-<?= $monster['id']; ?>" name="rating" min="1" max="10" required>
-                                <button type="submit">Oceń</button>
+                                <div class="rating-inputs">
+                                    <input type="number" id="rating-<?= $monster['id']; ?>" name="rating" min="1" max="10" required>
+                                    <button type="submit">Oceń</button>
+                                </div>
                             </form>
                         <?php else: ?>
-                            <a href="/login">Zaloguj się, aby ocenić</a>
+                            <a href="/login" class="login-prompt">Zaloguj się, aby ocenić</a>
                         <?php endif; ?>
                     </footer>
                 </article>
@@ -35,3 +32,4 @@
         </section>
     </main>
 </body>
+</html>
