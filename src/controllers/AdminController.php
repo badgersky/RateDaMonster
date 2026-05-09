@@ -23,7 +23,7 @@ class AdminController extends AppController {
     public function adminMonsters() {
         $this->checkAdmin();
         $monsterRepository = new MonsterRepository();
-        $this->render('admin-monsters', ['monsters' => $monsterRepository->getMonsters(), 'title' => 'Monster List']);
+        $this->render('admin-monsters', ['monsters' => $monsterRepository->getMonsters(false), 'title' => 'Monster List']);
     }
 
     public function addMonster($id = null) {
@@ -57,6 +57,16 @@ class AdminController extends AppController {
         $userRepository->deleteUser($id);
 
         header("Location: /admin/users");
+        exit();
+    }
+
+    public function deleteMonster(int $id) {
+        $this->checkAdmin();
+        
+        $monsterRepository = new MonsterRepository();
+        $monsterRepository->deleteMonster($id);
+    
+        header("Location: /admin/monsters");
         exit();
     }
 }

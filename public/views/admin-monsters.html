@@ -16,7 +16,9 @@
                 <td><?= $monster['name']; ?></td>
                 <td>
                     <a href="/admin/add-monster/<?= $monster['id']; ?>"><button>Edytuj</button></a>
-                    <button>Usuń</button>
+                    <form action="/admin/delete-monster/<?= $monster['id']; ?>" method="POST" style="display: inline;" onsubmit="return confirm('Czy na pewno chcesz usunąć tego monstera?');">
+                        <button type="submit">Usuń</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>

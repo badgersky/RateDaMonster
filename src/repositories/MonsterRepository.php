@@ -16,14 +16,16 @@ class MonsterRepository extends Repository {
         return $monster ?: null;
     }
 
-    public function getMonsters(): array 
+    public function getMonsters(bool $random = true): array 
     {
+        $orderBy = $random ? 'RANDOM()' : 'm.name ASC';
+
         $stmt = $this->database->connect()->prepare(
-            'SELECT m.*, ROUND(AVG(r.rating), 1) as avg_rating 
+            "SELECT m.*, ROUND(AVG(r.rating), 1) as avg_rating 
             FROM monsters m 
             LEFT JOIN ratings r ON m.id = r.monster_id 
             GROUP BY m.id 
-            ORDER BY RANDOM()'
+            ORDER BY $orderBy"
         );
         $stmt->execute();
 
