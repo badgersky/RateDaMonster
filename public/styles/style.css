@@ -245,7 +245,37 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover {
     border-bottom: 2px solid var(--monster-green);
 }
 
-.card-header, .card-footer {
+.rating-inputs-container .btn-edit, 
+.rating-inputs-container .btn-save {
+    flex: 1; 
+    white-space: nowrap;
+    padding: 8px 12px;
+}
+
+.card-header {
+    padding: 1.5rem;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 4em;
+}
+
+.rating-badge {
+    margin-top: auto;
+}
+
+.card-footer {
     padding: 1.5rem;
 }
 
@@ -253,6 +283,13 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover {
     padding: 0 1.5rem;
     color: var(--text-muted);
     flex-grow: 1;
+}
+
+.description.collapsed {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .rating-badge {

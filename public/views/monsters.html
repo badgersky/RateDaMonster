@@ -13,18 +13,24 @@
                             <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
                         </div>
                     </header>
-                    <p class="description"><?= $monster['description']; ?></p>
+                    <p class="description collapsed" id="desc-<?= $monster['id']; ?>">
+                        <?= $monster['description']; ?>
+                    </p>
                     <footer class="card-footer">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="rating-form">
                                 <label for="rating-<?= $monster['id']; ?>">Twoja ocena (1-10):</label>
-                                <div class="rating-inputs">
+                                <div class="rating-inputs-container">
                                     <input type="number" id="rating-<?= $monster['id']; ?>" name="rating" min="1" max="10" required>
-                                    <button type="submit">Oceń</button>
+                                    <button type="submit" class="btn-save">Oceń</button>
+                                    <button type="button" class="btn-edit" onclick="toggleDescription(<?= $monster['id']; ?>, this)">Opis +</button>
                                 </div>
                             </form>
                         <?php else: ?>
-                            <a href="/login" class="login-prompt">Zaloguj się, aby ocenić</a>
+                            <div class="rating-inputs-container">
+                                <a href="/login" class="nav-link" style="margin: 0;">Zaloguj się, aby ocenić</a>
+                                <button type="button" class="btn-edit" onclick="toggleDescription(<?= $monster['id']; ?>, this)">Opis +</button>
+                            </div>
                         <?php endif; ?>
                     </footer>
                 </article>
