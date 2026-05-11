@@ -13,7 +13,9 @@
                             <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
                         </div>
                     </header>
-                    <p class="description"><?= $monster['description']; ?></p>
+                    <p class="description collapsed" id="desc-<?= $monster['id']; ?>">
+                        <?= $monster['description']; ?>
+                    </p>
                     <footer class="card-footer">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="rating-form">
