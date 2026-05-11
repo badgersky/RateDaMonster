@@ -17,19 +17,54 @@
                     <footer class="card-footer">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="rating-form">
-                                <label for="rating-<?= $monster['id']; ?>">Twoja ocena (1-10):</label>
-                                <div class="rating-inputs">
+                                <div class="rating-group">
+                                    <label for="rating-<?= $monster['id']; ?>">Twoja ocena (1-10):</label>
                                     <input type="number" id="rating-<?= $monster['id']; ?>" name="rating" min="1" max="10" required>
-                                    <button type="submit">Oceń</button>
+                                </div>
+                                
+                                <div class="button-group">
+                                    <button type="submit" class="submit-btn">Oceń</button>
+                                    <button type="button" 
+                                            class="details-btn" 
+                                            data-name="<?= htmlspecialchars($monster['name']); ?>" 
+                                            data-img="<?= $monster['image_url']; ?>" 
+                                            data-desc="<?= htmlspecialchars($monster['description']); ?>"
+                                            onclick="openModal(this)">
+                                        Description
+                                    </button>
                                 </div>
                             </form>
                         <?php else: ?>
-                            <a href="/login" class="login-prompt">Zaloguj się, aby ocenić</a>
+                            <div class="logged-out-footer">
+                                <div class="button-group">
+                                    <a href="/login" class="btn-login">Login</a>
+                                    <button type="button" 
+                                            class="details-btn" 
+                                            data-name="<?= htmlspecialchars($monster['name']); ?>" 
+                                            data-img="<?= $monster['image_url']; ?>" 
+                                            data-desc="<?= htmlspecialchars($monster['description']); ?>"
+                                            onclick="openModal(this)">
+                                        Description
+                                    </button>
+                                </div>
+                            </div>
                         <?php endif; ?>
                     </footer>
                 </article>
             <?php endforeach; ?>
         </section>
     </main>
+    <div id="monsterModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="">
+                <div class="modal-info">
+                    <h2 id="modalName"></h2>
+                    <p id="modalDesc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
