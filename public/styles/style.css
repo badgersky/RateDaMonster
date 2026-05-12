@@ -34,19 +34,18 @@ body {
 .navbar {
     background-color: var(--monster-green);
     border-bottom: 2px solid #000;
-    padding: 1rem 0;
+    padding: 0; 
     margin-bottom: 2rem;
 }
 
 .nav-container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 1rem 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    position: relative;
 }
 
 .nav-logo {
@@ -60,18 +59,17 @@ body {
 .nav-menu {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 .user-info {
     color: #000;
-    margin-right: 10px;
     font-weight: 500;
 }
 
 .nav-link {
     color: #000;
     text-decoration: none;
-    margin-left: 15px;
     padding: 8px 12px;
     font-size: 0.9rem;
     transition: all 0.3s;
@@ -81,6 +79,25 @@ body {
 .nav-link:hover {
     background-color: #1a1a1a;
     color: var(--monster-green);
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #000;
+    transition: 0.3s;
 }
 
 h1, h2 {
@@ -124,13 +141,17 @@ input:focus {
     border-color: var(--monster-green);
 }
 
-.section-header {
+.actions {
     display: flex;
-    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-end;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    text-align: center;
+    flex-wrap: nowrap;
+}
+
+.inline-form {
+    display: inline-flex;
+    margin: 0;
 }
 
 button, .btn-add, .btn-edit, .btn-save, .btn-delete, .btn-login {
@@ -146,6 +167,11 @@ button, .btn-add, .btn-edit, .btn-save, .btn-delete, .btn-login {
     line-height: normal;
     text-align: center;
     box-sizing: border-box;
+}
+
+.btn-add {
+    display: inline-block;
+    width: fit-content; 
 }
 
 button, .btn-add, .btn-edit, .btn-save, .btn-login {
@@ -169,23 +195,6 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
     color: white;
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-start;
-}
-
-.inline-form {
-    display: inline-block;
-    margin: 0;
-}
-
-.admin-table .btn-edit, 
-.admin-table .btn-delete {
-    padding: 6px 15px;
-    font-size: 0.85rem;
-}
-
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -196,19 +205,10 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: auto;
 }
 
-.admin-table th:first-child, 
-.admin-table td:first-child {
-    width: 50px;
-    text-align: center;
-}
-
-.admin-table th:last-child, 
 .admin-table td:last-child {
-    width: 1%;
-    white-space: nowrap;
+    text-align: right;
 }
 
 .admin-table th, .admin-table td {
@@ -247,92 +247,54 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
     border-bottom: 2px solid var(--monster-green);
 }
 
-.rating-inputs-container .btn-edit, 
-.rating-inputs-container .btn-save {
-    flex: 1; 
-    white-space: nowrap;
-    padding: 8px 12px;
-}
-
-.card-header {
-    padding: 1.5rem;
-    height: 160px;
+.section-header {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
     text-align: center;
 }
 
+.card-header {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+}
+
 .card-header h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    line-height: 1.2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    height: 4.5rem;
     overflow: hidden;
-    height: 4em;
-}
-
-.rating-badge {
-    margin-top: auto;
-}
-
-.card-footer {
-    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    text-overflow: ellipsis;
 }
 
 .description {
     padding: 0 1.5rem;
     color: var(--text-muted);
     flex-grow: 1;
-    min-width: 0;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-}
-
-.card-header h2 {
-    height: 4.5rem;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    margin-bottom: 1.0rem; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-header {
-    padding: 2.0rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 120px; 
-}
-
-.description.collapsed {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .rating-badge {
     color: var(--monster-green);
     font-size: 1.1rem;
+    text-align: center;
+    margin-top: auto;
 }
 
-.message-item {
-    background-color: rgba(50, 205, 50, 0.1);
-    border: 1px solid var(--monster-green);
-    color: var(--monster-green);
-    padding: 10px;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    text-align: center;
+.card-footer {
+    padding: 1.5rem;
 }
 
 .modal {
@@ -352,30 +314,16 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
     color: var(--text-light);
     margin: 10% auto;
     padding: 30px;
-    width: 700px;
+    width: 90% ;
+    max-width: 700px;
     border-radius: var(--border-radius);
     border: 1px solid #333;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.close-button {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    font-size: 28px;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close-button:hover {
-    color: var(--monster-green);
 }
 
 .modal-body {
     display: flex;
-    align-items: flex-start; /* Wyrównanie elementów do góry */
+    align-items: flex-start;
     gap: 30px;
 }
 
@@ -383,45 +331,73 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
     width: 250px;
     height: 350px;
     object-fit: contain;
-    background: transparent; /* Usunięcie tła zdjęcia */
     flex-shrink: 0;
 }
 
-.modal-info {
-    flex: 1;
-    padding-top: 5px; /* Delikatna korekta, by tekst był idealnie z górą puszki */
+.admin-table th:last-child {
+    text-align: right;
+    padding-right: 12px;
 }
 
-#modalName {
-    margin: 0 0 15px 0; /* Usunięcie górnego marginesu */
-    color: var(--monster-green);
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#modalDesc {
+.close-button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 32px;
+    line-height: 1;
     color: var(--text-muted);
-    line-height: 1.6;
-    font-size: 1.1rem;
-    margin: 0;
+    cursor: pointer; 
+    transition: all 0.2s ease;
+    user-select: none; 
 }
 
-@media (max-width: 600px) {
-    .nav-container {
+.close-button:hover {
+    color: var(--monster-green); 
+    transform: scale(1.2); 
+}
+
+.close-button:active {
+    transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
         flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--monster-green);
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+        gap: 10px;
+    }
+
+    .menu-toggle:checked ~ .nav-menu {
+        display: flex;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .modal-body {
+        flex-direction: column;
+        align-items: center;
         text-align: center;
     }
-    
-    .nav-link {
-        margin: 5px;
-    }
-    
-    .container {
-        padding: 10px;
-    }
-    
-    .form-card {
-        padding: 1rem;
+
+    #modalImg {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
     }
 }
