@@ -1,0 +1,38 @@
+<?php include 'partials/head.html'; ?>
+<body>
+    <?php include 'partials/nav.html'; ?>
+    <main class="container">
+        <div class="details-wrapper">
+            <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
+            <div class="details-info">
+                <h1><?= $monster['name']; ?></h1>
+                <p><?= $monster['description']; ?></p>
+
+                <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="advanced-rating-form">
+                    <h3>Twoja ocena profilu smakowego</h3>
+                    
+                    <?php 
+                    $params = [
+                        'rating' => 'Ogólna ocena',
+                        'sourness' => 'Kwaśność',
+                        'sweetness' => 'Słodycz',
+                        'carbonation' => 'Nagazowanie',
+                        'energy_kick' => 'Kop energii'
+                    ];
+                    foreach ($params as $key => $label): 
+                        $val = $userRating[$key] ?? 5;
+                    ?>
+                        <div class="range-group">
+                            <label for="<?= $key ?>"><?= $label ?>: <span id="val-<?= $key ?>"><?= $val ?></span>/10</label>
+                            <input type="range" name="<?= $key ?>" id="<?= $key ?>" min="1" max="10" value="<?= $val ?>" oninput="document.getElementById('val-<?= $key ?>').innerText = this.value">
+                        </div>
+                    <?php endforeach; ?>
+
+                    <button type="submit" class="submit-btn">Zapisz ocenę</button>
+                    <a href="/monsters" class="back-btn">Powrót</a>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

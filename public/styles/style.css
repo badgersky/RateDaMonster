@@ -154,7 +154,7 @@ input:focus {
     margin: 0;
 }
 
-button, .btn-add, .btn-edit, .btn-save, .btn-delete, .btn-login {
+button, .btn-add, .btn-edit, .btn-save, .btn-delete, .btn-login, .btn-submit {
     display: inline-block;
     padding: 10px 25px;
     font-size: 1rem;
@@ -174,12 +174,12 @@ button, .btn-add, .btn-edit, .btn-save, .btn-delete, .btn-login {
     width: fit-content; 
 }
 
-button, .btn-add, .btn-edit, .btn-save, .btn-login {
+button, .btn-add, .btn-edit, .btn-save, .btn-login, .btn-submit {
     background-color: var(--monster-green);
     color: #000;
 }
 
-button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover {
+button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover, .btn-submit:hover {
     background-color: #1a1a1a;
     color: var(--monster-green);
 }

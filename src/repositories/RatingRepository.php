@@ -4,19 +4,28 @@ require_once 'Repository.php';
 
 class RatingRepository extends Repository {
 
-    public function addRating(int $userId, int $monsterId, int $rating): void 
+    public function addRating(int $userId, int $monsterId, array $data): void 
     {
         $query = $this->database->connect()->prepare(
-            "INSERT INTO ratings (user_id, monster_id, rating) 
-             VALUES (?, ?, ?)
+            "INSERT INTO ratings (user_id, monster_id, rating, sourness, sweetness, carbonation, energy_kick) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)
              ON CONFLICT (user_id, monster_id) 
-             DO UPDATE SET rating = EXCLUDED.rating;"
+             DO UPDATE SET 
+                rating = EXCLUDED.rating,
+                sourness = EXCLUDED.sourness,
+                sweetness = EXCLUDED.sweetness,
+                carbonation = EXCLUDED.carbonation,
+                energy_kick = EXCLUDED.energy_kick"
         );
 
         $query->execute([
             $userId,
             $monsterId,
-            $rating
+            $data['rating'],
+            $data['sourness'],
+            $data['sweetness'],
+            $data['carbonation'],
+            $data['energy_kick']
         ]);
     }
 
@@ -35,13 +44,13 @@ class RatingRepository extends Repository {
     public function getUserRating(int $userId, int $monsterId): ?int 
     {
         $query = $this->database->connect()->prepare(
-            "SELECT rating FROM ratings WHERE user_id = :user_id AND monster_id = :monster_id;"
+            "SELECT * FROM ratings WHERE user_id = :user_id AND monster_id = :monster_id;"
         );
         $query->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $query->bindParam(':monster_id', $monsterId, PDO::PARAM_INT);
         $query->execute();
 
         $result = $query->fetch(PDO::FETCH_ASSOC);
-        return $result ? (int)$result['rating'] : null;
+        return $result ? $result : null;
     }
 }
