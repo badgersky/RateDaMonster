@@ -2,36 +2,94 @@
 <body>
     <?php include 'partials/nav.html'; ?>
     <main class="container">
-        <div class="details-wrapper">
-            <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>">
-            <div class="details-info">
-                <h1><?= $monster['name']; ?></h1>
-                <p><?= $monster['description']; ?></p>
+        <div class="monster-details-layout">
+            
+            <section class="hero-section">
+                <div class="text-center">
+                    <h1><?= $monster['name']; ?></h1>
+                </div>
+                
+                <div class="featured-image-container">
+                    <img src="/<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" class="monster-main-img">
+                </div>
 
-                <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="advanced-rating-form">
-                    <h3>Twoja ocena profilu smakowego</h3>
-                    
-                    <?php 
-                    $params = [
-                        'rating' => 'Ogólna ocena',
-                        'sourness' => 'Kwaśność',
-                        'sweetness' => 'Słodycz',
-                        'carbonation' => 'Nagazowanie',
-                        'energy_kick' => 'Kop energii'
-                    ];
-                    foreach ($params as $key => $label): 
-                        $val = $userRating[$key] ?? 5;
-                    ?>
-                        <div class="range-group">
-                            <label for="<?= $key ?>"><?= $label ?>: <span id="val-<?= $key ?>"><?= $val ?></span>/10</label>
-                            <input type="range" name="<?= $key ?>" id="<?= $key ?>" min="1" max="10" value="<?= $val ?>" oninput="document.getElementById('val-<?= $key ?>').innerText = this.value">
+                <div class="description-container">
+                    <p class="monster-description"><?= $monster['description']; ?></p>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <h2 class="section-title">Średni profil smakowy</h2>
+                <div class="averages-wrapper">
+                    <?php if (!$allRatings): ?>
+                        <p class="empty-msg text-center">Ten Monster nie został jeszcze oceniony przez społeczność.</p>
+                    <?php else: ?>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span>Ogólna ocena</span>
+                                <strong><?= number_format($allRatings['avg_rating'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Słodycz</span>
+                                <strong><?= number_format($allRatings['avg_sweetness'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Kwaśność</span>
+                                <strong><?= number_format($allRatings['avg_sourness'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Nagazowanie</span>
+                                <strong><?= number_format($allRatings['avg_carbonation'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Kop energii</span>
+                                <strong><?= number_format($allRatings['avg_kick'], 1) ?>/10</strong>
+                            </div>
                         </div>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </section>
 
-                    <button type="submit" class="submit-btn">Zapisz ocenę</button>
-                    <a href="/monsters" class="back-btn">Powrót</a>
-                </form>
-            </div>
+            <section class="action-section">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="advanced-rating-form">
+                        <h2 class="section-title">Twoja ocena</h2>
+                        
+                        <div class="form-grid">
+                            <?php 
+                            $params = [
+                                'rating' => 'Ogólna ocena',
+                                'sourness' => 'Kwaśność',
+                                'sweetness' => 'Słodycz',
+                                'carbonation' => 'Nagazowanie',
+                                'energy_kick' => 'Kop energii'
+                            ];
+                            foreach ($params as $key => $label): 
+                                $val = $userRating[$key] ?? 5;
+                            ?>
+                                <div class="range-group">
+                                    <label for="<?= $key ?>"><?= $label ?>: <span id="val-<?= $key ?>"><?= $val ?></span></label>
+                                    <input type="range" name="<?= $key ?>" id="<?= $key ?>" min="1" max="10" value="<?= $val ?>" oninput="document.getElementById('val-<?= $key ?>').innerText = this.value">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button type="submit" class="submit-btn">Zapisz moją ocenę</button>
+                            <a href="/monsters" class="back-link">← Powrót do listy</a>
+                        </div>
+                    </form>
+                <?php else: ?>
+                    <div class="login-prompt text-center">
+                        <p>Zaloguj się, aby wystawić własną ocenę!</p>
+                        <div class="action-buttons">
+                            <a href="/login" class="submit-btn">Zaloguj się</a>
+                            <a href="/monsters" class="back-link">← Powrót do listy</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </section>
+
         </div>
     </main>
 </body>

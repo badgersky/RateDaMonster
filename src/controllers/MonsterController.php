@@ -20,16 +20,18 @@ class MonsterController extends AppController {
 
     public function monster($id) {
         session_start();
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /login");
-            exit();
-        }
-
+        
         $monsterRepository = new MonsterRepository();
         $ratingRepository = new RatingRepository();
-        $userId = $_SESSION['user_id'];
+        
+        $userId = $_SESSION['user_id'] ?? null;
 
         if ($this->isPost()) {
+            if (!$userId) {
+                header("Location: /login");
+                exit();
+            }
+
             $data = [
                 'rating' => (int)$_POST['rating'],
                 'sourness' => (int)$_POST['sourness'],
@@ -39,16 +41,25 @@ class MonsterController extends AppController {
             ];
 
             $ratingRepository->addRating($userId, (int)$id, $data);
+            header("Location: /monsters/" . $id);
+            exit();
+        }
+
+        $monster = $monsterRepository->getMonster((int)$id);
+        
+        if (!$monster) {
             header("Location: /monsters");
             exit();
         }
 
-        $monster = $monsterRepository->getMonster($id);
-        $userRating = $ratingRepository->getUserRating($userId, (int)$id);
+        $userRating = $userId ? $ratingRepository->getUserRating($userId, (int)$id) : null;
+        $allRatings = $ratingRepository->getMonsterRatings((int)$id);
 
         $this->render('monster-details', [
             'monster' => $monster,
-            'userRating' => $userRating
+            'userRating' => $userRating,
+            'allRatings' => $allRatings,
+            'title' => $monster['name']
         ]);
     }
 }
