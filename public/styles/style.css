@@ -307,8 +307,11 @@ button:hover, .btn-add:hover, .btn-edit:hover, .btn-save:hover, .btn-login:hover
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(5px);
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
-
 .modal-content {
     background-color: var(--bg-card);
     color: var(--text-light);
