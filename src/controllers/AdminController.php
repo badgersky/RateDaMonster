@@ -8,7 +8,7 @@ class AdminController extends AppController {
 
     private function checkAdmin() {
         session_start();
-        if ($_SESSION['username'] !== 'admin') {
+        if (!isset($_SESSION['account_type_id']) || (int)$_SESSION['account_type_id'] !== 2) {
             header("Location: /monsters");
             exit();
         }

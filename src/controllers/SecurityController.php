@@ -31,6 +31,7 @@ class SecurityController extends AppController {
         session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
+        $_SESSION['account_type_id'] = $user['account_type_id'];
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/monsters");
