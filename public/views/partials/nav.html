@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="nav-container">
-        <a href="/monsters" class="nav-logo">Lista Monsterków</a>
+        <a href="/monsters" class="nav-logo">Monster List</a>
         
         <input type="checkbox" id="menu-toggle" class="menu-toggle">
         <label for="menu-toggle" class="hamburger">
@@ -11,15 +11,15 @@
 
         <div class="nav-menu">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <span class="user-info">Witaj, <?= $_SESSION['username']; ?>!</span>
+                <span class="user-info">Hello, <?= $_SESSION['username']; ?>!</span>
                 <?php if ($_SESSION['username'] === 'admin'): ?>
-                    <a href="/admin/users" class="nav-link">Użytkownicy</a>
-                    <a href="/admin/monsters" class="nav-link">Zarządzaj Monsterami</a>
+                    <a href="/admin/users" class="nav-link">Manage Users</a>
+                    <a href="/admin/monsters" class="nav-link">Manage Monsters</a>
                 <?php endif; ?>
-                <a href="/logout" class="nav-link logout">Wyloguj</a>
+                <a href="/logout" class="nav-link logout">Logout</a>
             <?php else: ?>
-                <a href="/login" class="nav-link">Zaloguj</a>
-                <a href="/register" class="nav-link">Zarejestruj</a>
+                <a href="/login" class="nav-link">Login</a>
+                <a href="/register" class="nav-link">Register</a>
             <?php endif; ?>
         </div>
     </div>

@@ -10,7 +10,7 @@
                     <header class="card-header">
                         <h2><?= $monster['name']; ?></h2>
                         <div class="rating-badge">
-                            <strong>Średnia ocena: <?= $monster['avg_rating']; ?></strong>
+                            <strong>Average rating: <?= $monster['avg_rating']; ?></strong>
                         </div>
                     </header>
                     <p class="description collapsed" id="desc-<?= $monster['id']; ?>">
@@ -19,7 +19,7 @@
                     <footer class="card-footer">
                         <?php if (isset($_SESSION['user_id'])): ?>
                             <div class="button-group">
-                                <a href="/monsters/<?= $monster['id']; ?>" class="btn-submit">Oceń</a>
+                                <a href="/monsters/<?= $monster['id']; ?>" class="btn-submit">Rate</a>
                                 <button type="button" 
                                         class="details-btn" 
                                         data-name="<?= htmlspecialchars($monster['name']); ?>" 

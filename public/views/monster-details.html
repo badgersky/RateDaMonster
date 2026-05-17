@@ -19,30 +19,30 @@
             </section>
 
             <section class="history-section">
-                <h2 class="section-title">Średni profil smakowy</h2>
+                <h2 class="section-title">Average taste profile</h2>
                 <div class="averages-wrapper">
                     <?php if (!$allRatings): ?>
-                        <p class="empty-msg text-center">Ten Monster nie został jeszcze oceniony przez społeczność.</p>
+                        <p class="empty-msg text-center">This one hasn't been rated by anyone yet OwO</p>
                     <?php else: ?>
                         <div class="stats-grid">
                             <div class="stat-item">
-                                <span>Ogólna ocena</span>
+                                <span>Overall Rate</span>
                                 <strong><?= number_format($allRatings['avg_rating'], 1) ?>/10</strong>
                             </div>
                             <div class="stat-item">
-                                <span>Słodycz</span>
+                                <span>Sweetness</span>
                                 <strong><?= number_format($allRatings['avg_sweetness'], 1) ?>/10</strong>
                             </div>
                             <div class="stat-item">
-                                <span>Kwaśność</span>
+                                <span>Sourness</span>
                                 <strong><?= number_format($allRatings['avg_sourness'], 1) ?>/10</strong>
                             </div>
                             <div class="stat-item">
-                                <span>Nagazowanie</span>
+                                <span>Carbonation</span>
                                 <strong><?= number_format($allRatings['avg_carbonation'], 1) ?>/10</strong>
                             </div>
                             <div class="stat-item">
-                                <span>Kop energii</span>
+                                <span>Energy Kick</span>
                                 <strong><?= number_format($allRatings['avg_kick'], 1) ?>/10</strong>
                             </div>
                         </div>
@@ -58,11 +58,11 @@
                         <div class="form-grid">
                             <?php 
                             $params = [
-                                'rating' => 'Ogólna ocena',
-                                'sourness' => 'Kwaśność',
-                                'sweetness' => 'Słodycz',
-                                'carbonation' => 'Nagazowanie',
-                                'energy_kick' => 'Kop energii'
+                                'rating' => 'Overall Rate',
+                                'sourness' => 'Sourness',
+                                'sweetness' => 'Sweetness',
+                                'carbonation' => 'Carbonation',
+                                'energy_kick' => 'Energy Kick'
                             ];
                             foreach ($params as $key => $label): 
                                 $val = $userRating[$key] ?? 5;
@@ -75,21 +75,20 @@
                         </div>
 
                         <div class="action-buttons">
-                            <button type="submit" class="btn-submit">Zapisz moją ocenę</button>
-                            <a href="/monsters" class="btn-cancel">← Powrót do listy</a>
+                            <button type="submit" class="btn-submit">Save my rate</button>
+                            <a href="/monsters" class="btn-cancel">Go back</a>
                         </div>
                     </form>
                 <?php else: ?>
                     <div class="login-prompt text-center">
-                        <p>Zaloguj się, aby wystawić własną ocenę!</p>
+                        <p>Log in to rate this monster!</p>
                         <div class="action-buttons">
-                            <a href="/login" class="btn-login">Zaloguj się</a>
-                            <a href="/monsters" class="btn-cancel">Powrót do listy</a>
+                            <a href="/login" class="btn-login">Login</a>
+                            <a href="/monsters" class="btn-cancel">Go back</a>
                         </div>
                     </div>
                 <?php endif; ?>
             </section>
-
         </div>
     </main>
 </body>

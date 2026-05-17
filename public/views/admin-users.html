@@ -2,14 +2,14 @@
 <body>
     <?php include 'partials/nav.html'; ?>
     <main class="container">
-        <h1>Zarządzanie użytkownikami</h1>
+        <h1>Managing Users</h1>
         <div class="table-wrapper">
             <table class="admin-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Username</th>
-                        <th>Akcje</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <td><?= $user['username']; ?></td>
                         <td>
                             <form action="/admin/delete-user/<?= $user['id']; ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">
-                                <button type="submit" class="btn-delete">Usuń</button>
+                                <button type="submit" class="btn-delete">Delete</button>
                             </form>
                         </td>
                     </tr>
