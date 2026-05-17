@@ -4,3 +4,4 @@
 .env
 populate_monster_table.py
 venv
+certs

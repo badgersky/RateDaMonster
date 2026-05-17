@@ -21,11 +21,11 @@ class SecurityController extends AppController {
         $user = $userRepository->getUser($username);
 
         if (!$user) {
-            return $this->render('login', ['messages' => ['User not found!']]);
+            return $this->render('login', ['messages' => ['Username or password is wrong!']]);
         }
 
         if (!password_verify($password, $user['password'])) {
-            return $this->render('login', ['messages' => ['Wrong password!']]);
+            return $this->render('login', ['messages' => ['Username or password is wrong!']]);
         }
 
         session_start();
