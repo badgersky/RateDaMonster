@@ -14,10 +14,30 @@ class AdminController extends AppController {
         }
     }
 
-    public function users() {
+    public function users()
+    {
         $this->checkAdmin();
+
         $userRepository = new UserRepository();
-        $this->render('admin-users', ['users' => $userRepository->getUsers(), 'title' => 'Users List']);
+        $perPage = 25;
+
+        $page = isset($_GET['page'])
+            ? max(1, (int)$_GET['page'])
+            : 1;
+
+        $offset = ($page - 1) * $perPage;
+
+        $users = $userRepository->getUsersPaginated($perPage, $offset);
+
+        $totalUsers = $userRepository->countUsers();
+        $totalPages = ceil($totalUsers / $perPage);
+
+        $this->render('admin-users', [
+            'users' => $users,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'title' => 'Users List'
+        ]);
     }
 
     public function adminMonsters() {

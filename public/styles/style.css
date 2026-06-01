@@ -556,6 +556,40 @@ section {
     color: green;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 14px;
+    background-color: var(--bg-card);
+    color: var(--text-light);
+    text-decoration: none;
+    border: 1px solid var(--monster-green);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+    background-color: var(--monster-green);
+    color: var(--bg-dark);
+}
+
+.pagination a.active {
+    background-color: var(--monster-green);
+    color: var(--bg-dark);
+    font-weight: bold;
+    cursor: default;
+}
+
+.pagination a.active:hover {
+    background-color: var(--monster-green);
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
