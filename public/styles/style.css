@@ -542,6 +542,20 @@ section {
     text-shadow: 0 0 5px rgba(82, 255, 0, 0.3);
 }
 
+#password-rules {
+    margin-left: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+#password-rules li {
+    color: red;
+}
+
+#password-rules li.valid {
+    color: green;
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
