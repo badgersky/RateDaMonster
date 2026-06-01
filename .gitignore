@@ -2,7 +2,5 @@
 .vscode
 .idea
 .env
-populate_monster_table.py
-populate_user_table.py
 venv
 certs
