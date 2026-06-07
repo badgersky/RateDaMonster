@@ -20,8 +20,8 @@ def seed_ratings(count=2000):
         used_pairs = set()
 
         while len(used_pairs) < count:
-            user_id = random.randint(3, 104)
-            monster_id = random.randint(50, 98)
+            user_id = random.randint(2, 101)
+            monster_id = random.randint(1, 49)
 
             pair = (user_id, monster_id)
 

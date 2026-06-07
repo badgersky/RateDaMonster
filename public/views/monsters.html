@@ -3,9 +3,17 @@
     <?php include 'partials/nav.html'; ?>
     <main class="container">
         <h1>All Monster Energy Drinks</h1>
+        <div class="search-container">
+            <input
+                type="text"
+                id="monsterSearch"
+                placeholder="Search Monster..."
+                class="search-input"
+            >
+        </div>
         <section class="monster-grid">
             <?php foreach ($monsters as $monster): ?>
-                <article class="monster-card">
+                <article class="monster-card" data-name="<?= strtolower(htmlspecialchars($monster['name'])); ?>">
                     <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" loading="lazy" class="monster-img">
                     <header class="card-header">
                         <h2><?= $monster['name']; ?></h2>
