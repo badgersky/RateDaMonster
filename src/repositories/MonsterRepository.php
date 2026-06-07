@@ -21,10 +21,16 @@ class MonsterRepository extends Repository {
         $orderBy = $random ? 'RANDOM()' : 'm.name ASC';
 
         $stmt = $this->database->connect()->prepare(
-            "SELECT m.*, ROUND(AVG(r.rating), 1) as avg_rating 
-            FROM monsters m 
-            LEFT JOIN ratings r ON m.id = r.monster_id 
-            GROUP BY m.id 
+            "SELECT
+                m.*,
+                ROUND(COALESCE(AVG(r.rating), 0), 1) AS avg_rating,
+                ROUND(COALESCE(AVG(r.sweetness), 0), 1) AS avg_sweetness,
+                ROUND(COALESCE(AVG(r.sourness), 0), 1) AS avg_sourness,
+                ROUND(COALESCE(AVG(r.carbonation), 0), 1) AS avg_carbonation,
+                ROUND(COALESCE(AVG(r.energy_kick), 0), 1) AS avg_energy_kick
+            FROM monsters m
+            LEFT JOIN ratings r ON m.id = r.monster_id
+            GROUP BY m.id
             ORDER BY $orderBy"
         );
         $stmt->execute();

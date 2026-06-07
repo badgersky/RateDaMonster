@@ -122,6 +122,86 @@ h1, h2 {
     justify-content: center;
 }
 
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 30px;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 450px; 
+}
+
+.search-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.sort-container {
+    position: relative;
+    display: flex;
+    width: auto;
+}
+
+.sort-btn {
+    width: 150px;
+    height: 44px;
+    padding: 0 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #444;
+    background-color: #1e1e1e;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 50px; 
+    background: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 8px;
+    min-width: 220px;
+    z-index: 100;
+}
+
+.sort-menu.active {
+    display: block;
+}
+
+.sort-menu button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sort-menu button:hover {
+    background: #333;
+}
+
 .search-input {
     width: 400px;
     max-width: 90%;

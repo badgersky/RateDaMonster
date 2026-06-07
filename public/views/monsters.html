@@ -3,17 +3,37 @@
     <?php include 'partials/nav.html'; ?>
     <main class="container">
         <h1>All Monster Energy Drinks</h1>
-        <div class="search-container">
-            <input
-                type="text"
-                id="monsterSearch"
-                placeholder="Search Monster..."
-                class="search-input"
-            >
-        </div>
-        <section class="monster-grid">
+            <div class="controls-container">
+                <div class="search-container">
+                    <input
+                        type="text"
+                        id="monsterSearch"
+                        placeholder="Search Monster..."
+                        class="search-input">
+                </div>
+                <div class="sort-container">
+                    <button id="sortButton" class="sort-btn">
+                        Sort ▼
+                    </button>
+                    <div id="sortMenu" class="sort-menu">
+                        <button data-sort="rating">Highest Rating</button>
+                        <button data-sort="sweetness">Sweetest</button>
+                        <button data-sort="sourness">Most Sour</button>
+                        <button data-sort="carbonation">Most Carbonated</button>
+                        <button data-sort="energy">Strongest Energy Kick</button>
+                        <button data-sort="name">A-Z</button>
+                    </div>
+                </div>
+            </div>
+        <section class="monster-grid" id="monsterGrid">
             <?php foreach ($monsters as $monster): ?>
-                <article class="monster-card" data-name="<?= strtolower(htmlspecialchars($monster['name'])); ?>">
+                <article class="monster-card"
+                    data-name="<?= strtolower(htmlspecialchars($monster['name'])); ?>"
+                    data-rating="<?= $monster['avg_rating']; ?>"
+                    data-sweetness="<?= $monster['avg_sweetness']; ?>"
+                    data-sourness="<?= $monster['avg_sourness']; ?>"
+                    data-carbonation="<?= $monster['avg_carbonation']; ?>"
+                    data-energy="<?= $monster['avg_energy_kick']; ?>">
                     <img src="<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" loading="lazy" class="monster-img">
                     <header class="card-header">
                         <h2><?= $monster['name']; ?></h2>
