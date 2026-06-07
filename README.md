@@ -185,3 +185,13 @@ Admin users have access to:
 /admin/users
 /admin/monsters
 ```
+
+## Security Measures
+
+* Password hashing using bcrypt
+* Using HTTPS
+* Server-side validation
+* Session-based authentication
+* Authorization checks for admin routes
+* Protected admin-only actions
+* Prepared SQL statements through PDO
