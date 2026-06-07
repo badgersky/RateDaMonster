@@ -14,6 +14,39 @@ class UserRepository extends Repository {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function searchUsersPaginated(string $search, int $limit, int $offset): array
+    {
+        $stmt = $this->database->connect()->prepare("
+            SELECT id, username
+            FROM users
+            WHERE username ILIKE :search
+            ORDER BY username
+            LIMIT :limit OFFSET :offset
+        ");
+
+        $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countSearchUsers(string $search): int
+    {
+        $stmt = $this->database->connect()->prepare("
+            SELECT COUNT(*)
+            FROM users
+            WHERE username ILIKE :search
+        ");
+
+        $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return (int) $stmt->fetchColumn();
+    }
+
     public function getUser(string $username): ?array 
     {
         $query = $this->database->connect()->prepare(

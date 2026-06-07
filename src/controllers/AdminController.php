@@ -27,16 +27,24 @@ class AdminController extends AppController {
 
         $offset = ($page - 1) * $perPage;
 
-        $users = $userRepository->getUsersPaginated($perPage, $offset);
+        $search = $_GET['search'] ?? '';
 
-        $totalUsers = $userRepository->countUsers();
+        if (!empty($search)) {
+            $users = $userRepository->searchUsersPaginated($search, $perPage, $offset);
+            $totalUsers = $userRepository->countSearchUsers($search);
+        } else {
+            $users = $userRepository->getUsersPaginated($perPage, $offset);
+            $totalUsers = $userRepository->countUsers();
+        }
+
         $totalPages = ceil($totalUsers / $perPage);
 
         $this->render('admin-users', [
             'users' => $users,
             'currentPage' => $page,
             'totalPages' => $totalPages,
-            'title' => 'Users List'
+            'title' => 'Users List',
+            'search' => $search
         ]);
     }
 

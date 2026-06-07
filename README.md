@@ -34,9 +34,9 @@ RateDaMonster is a PHP web application that allows users to browse, rate, and re
 
 ---
 
-## Screenshots
+# Screenshots
 
-### Authentication Pages
+## Authentication Pages
 **Login Page**    
 ![Login Page](screenshots/monster-login.png)
 
@@ -45,7 +45,7 @@ RateDaMonster is a PHP web application that allows users to browse, rate, and re
 
 ---
 
-### User Pages
+## User Pages
 **Monsters List Page**  
 ![Monsters Page](screenshots/monsters-page.png)
 
@@ -57,14 +57,12 @@ RateDaMonster is a PHP web application that allows users to browse, rate, and re
 
 ---
 
-### Admin Panel
+## Admin Panel
 
-**Admin Users Page**  
-*(Add screenshot here)*  
+**Admin Users Page**    
 ![Admin Users Page](screenshots/admin-users.png)
 
-**Admin Monsters Page**  
-*(Add screenshot here)*  
+**Admin Monsters Page**
 ![Admin Monsters Page](screenshots/admin-monsters.png)
 
 ---
@@ -72,7 +70,6 @@ RateDaMonster is a PHP web application that allows users to browse, rate, and re
 ## Database Diagram
 
 ### ERD (Entity Relationship Diagram)
-*(Add ERD diagram here)*  
 ![ERD Diagram](screenshots/erd.png)
 
 ---

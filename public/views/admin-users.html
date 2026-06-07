@@ -3,6 +3,14 @@
     <?php include 'partials/nav.html'; ?>
     <main class="container">
         <h1>Managing Users</h1>
+        <form method="GET" action="/admin/users" class="search-container">
+            <input
+                type="text"
+                name="search"
+                placeholder="Search user..."
+                value="<?= htmlspecialchars($search ?? '') ?>"
+                class="search-input">
+        </form>
         <div class="table-wrapper">
             <table class="admin-table">
                 <thead>
@@ -28,7 +36,7 @@
             </table>
             <div class="pagination">
                 <?php if ($currentPage > 1): ?>
-                    <a href="/admin/users?page=<?= $currentPage - 1 ?>">Previous</a>
+                    <a href="/admin/users?page=<?= $currentPage - 1 ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">Previous</a>
                 <?php endif; ?>
 
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
@@ -41,7 +49,7 @@
                 <?php endfor; ?>
 
                 <?php if ($currentPage < $totalPages): ?>
-                    <a href="/admin/users?page=<?= $currentPage + 1 ?>">Next</a>
+                    <a href="/admin/users?page=<?= $currentPage + 1 ?>&search=<?= urlencode($_GET['search'] ?? '') ?>">Next</a>
                 <?php endif; ?>
             </div>
         </div>
