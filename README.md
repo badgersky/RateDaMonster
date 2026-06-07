@@ -123,3 +123,65 @@ RateDaMonster/
 ├── Database.php
 ├── Routing.php
 └── index.php
+
+## Authentication
+
+Passwords are:
+
+* Validated on both client and server side
+* Hashed using `password_hash()` with `PASSWORD_BCRYPT`
+* Verified using `password_verify()`
+
+Password requirements:
+
+* Minimum 8 characters
+* At least one uppercase letter
+* At least one lowercase letter
+* At least one number
+* At least one special character
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone <repository-url>
+cd RateDaMonster
+```
+
+### Configure Database
+
+Update database settings inside:
+
+```php
+config.php
+```
+
+### Start Containers
+
+```bash
+docker compose up --build
+```
+
+### Access Application
+
+Open:
+
+```text
+http://localhost
+```
+
+## Admin Access
+
+Administrator accounts use:
+
+```text
+account_type_id = 2
+```
+
+Admin users have access to:
+
+```text
+/admin/users
+/admin/monsters
+```
