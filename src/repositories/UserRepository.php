@@ -48,4 +48,30 @@ class UserRepository extends Repository {
     $query->bindParam(':id', $id, PDO::PARAM_INT);
     $query->execute();
     }
+
+    public function getUsersPaginated(int $limit, int $offset): array
+    {
+        $stmt = $this->database->connect()->prepare("
+            SELECT id, username
+            FROM users
+            ORDER BY username
+            LIMIT :limit OFFSET :offset
+        ");
+
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countUsers(): int
+    {
+        $stmt = $this->database->connect()->query("
+            SELECT COUNT(*) FROM users
+        ");
+
+        return (int) $stmt->fetchColumn();
+    }
 }

@@ -3,22 +3,22 @@
     <?php include 'partials/nav.html'; ?>
     <main class="container">
         <section class="form-card">
-            <h1><?= isset($monster) ? 'Edytuj Monstera' : 'Dodaj nowego Monstera'; ?></h1>
+            <h1><?= isset($monster) ? 'Edit Monster' : 'Add New Monster'; ?></h1>
             <form action="/admin/add-monster<?= isset($monster) ? '/'.$monster['id'] : ''; ?>" method="POST" class="admin-form">
                 <div class="form-group">
-                    <label>Nazwa:</label>
+                    <label>Name:</label>
                     <input name="name" type="text" value="<?= $monster['name'] ?? ''; ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Opis:</label>
+                    <label>Descritpion:</label>
                     <textarea name="description" required><?= $monster['description'] ?? ''; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>URL zdjęcia:</label>
+                    <label>Image URL:</label>
                     <input name="image_url" type="text" value="<?= $monster['image_url'] ?? ''; ?>" required>
                 </div>
                 <div class="form-group">
-                    <label>Typ Monstera:</label>
+                    <label>Monster type:</label>
                     <select name="type_id" required>
                         <option value="" disabled <?= !isset($monster) ? 'selected' : ''; ?>>Wybierz typ</option>
                         <?php foreach ($types as $type): ?>
@@ -30,8 +30,8 @@
                     </select>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-save"><?= isset($monster) ? 'Zapisz zmiany' : 'Dodaj Monsterka'; ?></button>
-                    <a href="/admin/monsters" class="btn-cancel">Anuluj</a>
+                    <button type="submit" class="btn-save"><?= isset($monster) ? 'Save changes' : 'Add Monster'; ?></button>
+                    <a href="/admin/monsters" class="btn-cancel">Cancel</a>
                 </div>
             </form>
         </section>

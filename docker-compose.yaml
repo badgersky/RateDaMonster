@@ -4,9 +4,12 @@
         context: .
         dockerfile: docker/nginx/Dockerfile
       ports:
-        - "8080:80"
+        - "80:80"
+        - "443:443"
       volumes:
         - .:/app/
+        - ./certs/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
+        - ./certs/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
       links:
         - php
       networks:
@@ -35,6 +38,11 @@
         - .:/app
       networks:
         - pg-network
+      environment:
+        PHP_VALUE: |
+          session.cookie_secure = 1
+          session.cookie_httponly = 1
+          session.cookie_samesite = "Lax"
     
     pgadmin-wdpai:
       image: dpage/pgadmin4:latest

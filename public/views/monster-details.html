@@ -1,0 +1,95 @@
+<?php include 'partials/head.html'; ?>
+<body>
+    <?php include 'partials/nav.html'; ?>
+    <main class="container">
+        <div class="monster-details-layout">
+            
+            <section class="hero-section">
+                <div class="text-center">
+                    <h1><?= $monster['name']; ?></h1>
+                </div>
+                
+                <div class="featured-image-container">
+                    <img src="/<?= $monster['image_url']; ?>" alt="<?= $monster['name']; ?>" class="monster-main-img">
+                </div>
+
+                <div class="description-container">
+                    <p class="monster-description"><?= $monster['description']; ?></p>
+                </div>
+            </section>
+
+            <section class="history-section">
+                <h2 class="section-title">Average taste profile</h2>
+                <div class="averages-wrapper">
+                    <?php if (!$allRatings): ?>
+                        <p class="empty-msg text-center">This one hasn't been rated by anyone yet OwO</p>
+                    <?php else: ?>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span>Overall Rate</span>
+                                <strong><?= number_format($allRatings['avg_rating'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Sweetness</span>
+                                <strong><?= number_format($allRatings['avg_sweetness'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Sourness</span>
+                                <strong><?= number_format($allRatings['avg_sourness'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Carbonation</span>
+                                <strong><?= number_format($allRatings['avg_carbonation'], 1) ?>/10</strong>
+                            </div>
+                            <div class="stat-item">
+                                <span>Energy Kick</span>
+                                <strong><?= number_format($allRatings['avg_kick'], 1) ?>/10</strong>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </section>
+
+            <section class="action-section">
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form action="/monsters/<?= $monster['id']; ?>" method="POST" class="advanced-rating-form">
+                        <h2 class="section-title">Twoja ocena</h2>
+                        
+                        <div class="form-grid">
+                            <?php 
+                            $params = [
+                                'rating' => 'Overall Rate',
+                                'sourness' => 'Sourness',
+                                'sweetness' => 'Sweetness',
+                                'carbonation' => 'Carbonation',
+                                'energy_kick' => 'Energy Kick'
+                            ];
+                            foreach ($params as $key => $label): 
+                                $val = $userRating[$key] ?? 5;
+                            ?>
+                                <div class="range-group">
+                                    <label for="<?= $key ?>"><?= $label ?>: <span id="val-<?= $key ?>"><?= $val ?></span></label>
+                                    <input type="range" name="<?= $key ?>" id="<?= $key ?>" min="1" max="10" value="<?= $val ?>" oninput="document.getElementById('val-<?= $key ?>').innerText = this.value">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button type="submit" class="btn-submit">Save my rate</button>
+                            <a href="/monsters" class="btn-cancel">Go back</a>
+                        </div>
+                    </form>
+                <?php else: ?>
+                    <div class="login-prompt text-center">
+                        <p>Log in to rate this monster!</p>
+                        <div class="action-buttons">
+                            <a href="/login" class="btn-login">Login</a>
+                            <a href="/monsters" class="btn-cancel">Go back</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

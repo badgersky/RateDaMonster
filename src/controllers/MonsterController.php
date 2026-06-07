@@ -19,28 +19,47 @@ class MonsterController extends AppController {
     }
 
     public function monster($id) {
+        session_start();
+        
+        $monsterRepository = new MonsterRepository();
+        $ratingRepository = new RatingRepository();
+        
+        $userId = $_SESSION['user_id'] ?? null;
+
         if ($this->isPost()) {
-            session_start();
-            
-            if (!isset($_SESSION['user_id'])) {
-                $url = "http://$_SERVER[HTTP_HOST]";
-                header("Location: {$url}/login");
+            if (!$userId) {
+                header("Location: /login");
                 exit();
             }
 
-            $userId = $_SESSION['user_id'];
-            $rating = (int)($_POST['rating'] ?? 0);
+            $data = [
+                'rating' => (int)$_POST['rating'],
+                'sourness' => (int)$_POST['sourness'],
+                'sweetness' => (int)$_POST['sweetness'],
+                'carbonation' => (int)$_POST['carbonation'],
+                'energy_kick' => (int)$_POST['energy_kick']
+            ];
 
-            if ($rating >= 1 && $rating <= 10) {
-                $ratingRepository = new RatingRepository();
-                $ratingRepository->addRating($userId, (int)$id, $rating);
-            }
+            $ratingRepository->addRating($userId, (int)$id, $data);
+            header("Location: /monsters/" . $id);
+            exit();
+        }
 
+        $monster = $monsterRepository->getMonster((int)$id);
+        
+        if (!$monster) {
             header("Location: /monsters");
             exit();
         }
 
-        header("Location: /monsters");
-        exit();
+        $userRating = $userId ? $ratingRepository->getUserRating($userId, (int)$id) : null;
+        $allRatings = $ratingRepository->getMonsterRatings((int)$id);
+
+        $this->render('monster-details', [
+            'monster' => $monster,
+            'userRating' => $userRating,
+            'allRatings' => $allRatings,
+            'title' => $monster['name']
+        ]);
     }
 }

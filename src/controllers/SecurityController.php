@@ -21,16 +21,17 @@ class SecurityController extends AppController {
         $user = $userRepository->getUser($username);
 
         if (!$user) {
-            return $this->render('login', ['messages' => ['User not found!']]);
+            return $this->render('login', ['messages' => ['Username or password is wrong!']]);
         }
 
         if (!password_verify($password, $user['password'])) {
-            return $this->render('login', ['messages' => ['Wrong password!']]);
+            return $this->render('login', ['messages' => ['Username or password is wrong!']]);
         }
 
         session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
+        $_SESSION['account_type_id'] = $user['account_type_id'];
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/monsters");
@@ -53,6 +54,12 @@ class SecurityController extends AppController {
             return $this->render('register', ['messages' => ['Passwords do not match!']]);
         }
 
+        if (!$this->isStrongPassword($password)) {
+            return $this->render('register', [
+                'messages' => ['Password does not meet security requirements.']
+            ]);
+        }
+
         $userRepository = new UserRepository();
         
         try {
@@ -71,5 +78,14 @@ class SecurityController extends AppController {
         
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/login");
+    }
+
+    private function isStrongPassword(string $password): bool
+    {
+        return strlen($password) >= 8
+            && preg_match('/[A-Z]/', $password)
+            && preg_match('/[a-z]/', $password)
+            && preg_match('/\d/', $password)
+            && preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password);
     }
 }

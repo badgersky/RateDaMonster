@@ -27,11 +27,17 @@ CREATE TABLE monsters (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS ratings;
+
 CREATE TABLE ratings (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     monster_id INTEGER NOT NULL REFERENCES monsters(id) ON DELETE CASCADE,
     rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 10),
+    sourness INTEGER NOT NULL CHECK (sourness >= 1 AND sourness <= 10),
+    sweetness INTEGER NOT NULL CHECK (sweetness >= 1 AND sweetness <= 10),
+    carbonation INTEGER NOT NULL CHECK (carbonation >= 1 AND carbonation <= 10),
+    energy_kick INTEGER NOT NULL CHECK (energy_kick >= 1 AND energy_kick <= 10),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(user_id, monster_id)
 );
